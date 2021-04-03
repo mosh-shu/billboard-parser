@@ -12,10 +12,11 @@ def ExtractFile(filepath):
     return raw
 
 def ExtractMeta(raw):
-    title = re.split('# title: |\n', raw[0])[1]
-    artist = re.split('# artist: |\n', raw[1])[1]
-    metre = re.split('# metre: |\n', raw[2])[1]
-    tonic = re.split('# tonic: |\n', raw[3])[1]
+    meta = ''.join(raw[:5])
+    title = [x for x in re.split('# title: |\n', meta) if x and not x[0]=='#'][0]
+    artist = [x for x in re.split('# artist: |\n', meta) if x and not x[0]=='#'][0]
+    metre = [x for x in re.split('# metre: |\n', meta) if x and not x[0]=='#'][0]
+    tonic = [x for x in re.split('# tonic: |\n', meta) if x and not x[0]=='#'][0]
 
     return (title, artist, metre, tonic)
 
@@ -23,9 +24,11 @@ def ExtractPhrases(raw):
     raw = raw[6:-2]
     phrases = list()
     for row in raw:
-        splitted = re.split('\t', row)[1:][0]
-        splitted = re.split('\|', splitted)[1:]
+        splitted = re.split('\t', row)[1:]
+        if not splitted: continue
+        splitted = splitted[0]
         
+        splitted = re.split('\|', splitted)[1:]        
         if not splitted: continue
         
         phrase = splitted[:-1]

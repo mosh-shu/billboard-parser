@@ -1,6 +1,10 @@
 import re
 import util
 
+"""
+this module is a set of functions to parse salami_chords.txt and extract chords
+"""
+
 def ExtractFile(filepath):
     f = open(filepath, 'r')
     raw = f.readlines()
@@ -27,7 +31,7 @@ def ExtractPhrases(raw):
         phrase = splitted[:-1]
 
         # check for repeat
-        if IsRepeat(splitted[-1][1:3]):
+        if util.IsRepeat(splitted[-1][1:3]):
             phrase.append(splitted[-1][1:3])
 
         phrases.append(phrase)

@@ -1,3 +1,8 @@
+"""
+this module is a set of functions to convert raw chords in to desired formats, 
+such as relative chords and inC chords.
+"""
+
 def Raw2Basic(chord_raw):
     root = chord_raw.split(':')[0]
     func = chord_raw.split(':')[1].split('/')[0]

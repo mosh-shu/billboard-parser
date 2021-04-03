@@ -1,5 +1,9 @@
 import re
 
+"""
+this module if a set of utility functions
+"""
+
 def IsRepeat(str):
     if re.match(r'x\d', str):
         return True

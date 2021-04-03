@@ -6,6 +6,8 @@ import parsetxt, converter
 datadir = "../data/McGill-Billboard/"
 filepaths = glob.glob(datadir+'[0-9][0-9][0-9][0-9]/salami_chords.txt')
 
+filepath = filepaths[0]
+
 raw = parsetxt.ExtractFile(filepath)
 (title, artist, metre, tonic) = parsetxt.ExtractMeta(raw)
 
@@ -30,3 +32,5 @@ df_chords['chords_basic_inC'] = df_chords['chords_basic_rel'].apply(converter.Re
 df_chords['chords_root_inC'] = df_chords['chords_root_rel'].apply(converter.Rel2InC)
 
 df_chords['meta'] = ['title: '+title, 'artist: '+artist, 'metre: '+metre, 'tonic: '+tonic] + [np.nan] * (len(df_chords)-4)
+
+print(df_chords)

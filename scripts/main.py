@@ -37,4 +37,4 @@ for i, filepath in enumerate(filepaths):
 
   df_chords['meta'] = ['title: '+title, 'artist: '+artist, 'metre: '+metre, 'tonic: '+tonic] + [np.nan] * (len(df_chords)-4)
 
-  df_chords.to_csv(csvpath)
+  df_chords.to_csv(csvpath, index=False)

@@ -74,7 +74,19 @@ def FormatChords(phrases_clean):
 
 def CreateIndex(chords):
     indexs_bar = list()
+    indexs_time= list()
     for i, bar in enumerate(chords):
         index_bar = [i]*len(bar)
+        index_time= np.arange(i, i+1, 1/len(bar))
         indexs_bar.append(index_bar)
-    return indexs_bar
+        indexs_time.append(list(index_time))
+    return (indexs_bar, indexs_time)
+
+def RemoveDots(chords, indexs_bar, indexs_time):
+    for b_i, bar in enumerate(chords):
+        for c_i, chord in enumerate(bar):
+            if chord=='.':
+                chords[b_i].pop(c_i)
+                indexs_bar[b_i].pop(c_i)
+                indexs_time[b_i].pop(c_i)
+    return (chords, indexs_bar, indexs_time)

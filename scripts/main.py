@@ -19,10 +19,12 @@ for i, filepath in enumerate(filepaths):
   phrases_clean = parsetxt.CleanPhrases(phrases)
   chords = parsetxt.FormatChords(phrases_clean)
 
-  chords_index = parsetxt.CreateIndex(chords)
+  (indexs_bar, indexs_time) = parsetxt.CreateIndex(chords)
+  (chords, indexs_bar, indexs_time) = parsetxt.RemoveDots(chords, indexs_bar, indexs_time)
 
   df_chords = pd.DataFrame()
-  df_chords['bar'] = sum(chords_index, [])
+  df_chords['bar'] = sum(indexs_bar, [])
+  df_chords['bar_time'] = sum(indexs_time, [])
   df_chords['chords'] = sum(chords, [])
   df_chords['chords_basic'] = df_chords['chords'].apply(converter.Raw2Basic)
   df_chords['chords_root'] = df_chords['chords'].apply(converter.Raw2Root)

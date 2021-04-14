@@ -20,7 +20,8 @@ for i, filepath in enumerate(filepaths):
   chords = parsetxt.FormatChords(phrases_clean)
 
   (indexs_bar, indexs_time) = parsetxt.CreateIndex(chords)
-  (chords, indexs_bar, indexs_time) = parsetxt.RemoveDots(chords, indexs_bar, indexs_time)
+  while '.' in sum(chords, []):
+      (chords, indexs_bar, indexs_time) = parsetxt.RemoveDots(chords, indexs_bar, indexs_time)
 
   df_chords = pd.DataFrame()
   df_chords['bar'] = sum(indexs_bar, [])

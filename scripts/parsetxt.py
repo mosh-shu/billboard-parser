@@ -1,3 +1,4 @@
+import numpy as np
 import re
 import util
 
@@ -53,6 +54,9 @@ def FormatChords(phrases_clean):
     for phrase in phrases_clean:
         # clean non-chords
         phrase_chord = [util.RemoveNoise(chord) for chord in phrase]
+
+        # remove blank chords
+        phrase_chord = [p for p in phrase_chord if p!='']
         
         # remove blank (noise-only) lines
         if all([not p for p in phrase_chord]): continue
